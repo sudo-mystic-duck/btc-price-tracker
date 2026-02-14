@@ -12,7 +12,7 @@ built a website! I actually built a backend!
 
 ## Installation
 ```bash
-git clone ...
+git clone https://github.com/sudo-mystic-duck/btc-price-tracker.git
 cd btc-price-tracker
 bun install
 bun run src/index.ts
