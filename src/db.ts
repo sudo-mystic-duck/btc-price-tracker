@@ -1,5 +1,9 @@
 import { Database } from "bun:sqlite";
 
+/*
+Creates a new database.
+*/
+
 export const db = new Database("db.sqlite");
 
 db.run(`

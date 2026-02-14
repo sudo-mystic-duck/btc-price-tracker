@@ -1,5 +1,3 @@
-import { reduceEachTrailingCommentRange } from "typescript";
-
 interface CoinBase {
   data: {
     amount: string;
@@ -13,6 +11,11 @@ interface PriceData {
   base: string;
   currency: string;
 }
+
+/*
+Fetches the BTC price from coinbase.
+It gives back an error if it fails.
+*/
 
 export async function fetchBtcPrice(): Promise<PriceData> {
   const response = await fetch(
