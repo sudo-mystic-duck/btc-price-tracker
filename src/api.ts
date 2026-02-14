@@ -1,16 +1,4 @@
-interface CoinBase {
-  data: {
-    amount: string;
-    base: string;
-    currency: string;
-  };
-}
-
-interface PriceData {
-  amount: number;
-  base: string;
-  currency: string;
-}
+import type { CoinBase, PriceData } from "./types";
 
 /*
 Fetches the BTC price from coinbase.
