@@ -19,9 +19,13 @@ bun run src/index.ts
 ## Installation for Users
 1. Download the latest release from [Releases](https://github.com/sudo-mystic-duck/btc-price-tracker/releases)
 2. **Mac and Linux users:** Open your terminal, copy/paste the following command and drag and drop the file into your
-terminal and press Enter to make it executable. Then, run the executable file by either double clicking it or dragging it into your terminal.
+terminal and press Enter to make it executable.
+
 ```bash
 chmod +x ./path/to/your/file
 ```
+
+Then, run the executable file by either double clicking it or dragging it into your terminal.
+
 3. **Windows users:** Just double click the file.
 4. Your terminal should now display the current Bitcoin price. The db.sqlite file should be created in your home directory(at least on MacOS).
