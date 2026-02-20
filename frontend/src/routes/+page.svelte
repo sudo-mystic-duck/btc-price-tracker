@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { onMount } from 'svelte';
+
+	async function fetchPrice() {
+		const response = await fetch('http://localhost:3000/');
+		const data = await response.json();
+		console.log(data);
+
+		return;
+	}
+
+	onMount(() => {
+		fetchPrice();
+	});
+</script>
