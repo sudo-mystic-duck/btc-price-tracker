@@ -1,21 +1,17 @@
 import { fetchBtcPrice } from "./api";
-import { createDb } from "./db";
+import { initDb } from "./db";
 
 /*
 Gets the current Bitcoin price from api.ts and adds it to the database.
 */
 
 export async function addToDb(): Promise<void> {
-  try {
-    const data = await fetchBtcPrice();
-    const db = createDb();
+  const data = await fetchBtcPrice();
+  const db = initDb();
 
-    db.run("INSERT INTO prices (base, price, currency) VALUES (?, ?, ?)", [
-      data.base,
-      data.amount,
-      data.currency,
-    ]);
-  } catch (error: unknown) {
-    console.error("Error: ", error);
-  }
+  db.run("INSERT INTO prices (base, price, currency) VALUES (?, ?, ?)", [
+    data.base,
+    data.amount,
+    data.currency,
+  ]);
 }

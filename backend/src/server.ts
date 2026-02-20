@@ -1,2 +1,46 @@
-import { db } from "./db";
+import { initDb } from "./db";
 
+/*
+Creates a server that serves the application under /prices for all prices and
+/ for the latest price. This is a API.
+*/
+
+export function serve(): void {
+  const db = initDb();
+
+  Bun.serve({
+    async fetch(req) {
+      const url = new URL(req.url);
+
+      if (url.pathname === "/prices") {
+        try {
+          const rows = db.query("SELECT * FROM prices ORDER BY id DESC").all();
+
+          return Response.json(rows);
+        } catch (error) {
+          console.error(error);
+          return new Response("Internal Server Error", { status: 500 });
+        }
+      }
+
+      if (url.pathname === "/") {
+        try {
+          const price = db
+            .query("SELECT * FROM prices ORDER BY id DESC LIMIT 1")
+            .get();
+
+          if (!price) {
+            return new Response("No prices stored yet", { status: 404 });
+          }
+
+          return Response.json(price);
+        } catch (error) {
+          console.error(error);
+          return new Response("Failed to fetch price", { status: 500 });
+        }
+      }
+
+      return new Response("Not Found", { status: 404 });
+    },
+  });
+}

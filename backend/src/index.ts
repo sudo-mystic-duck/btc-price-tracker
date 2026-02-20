@@ -1,17 +1,20 @@
-import { output } from "./output";
+import { serve } from "./server";
+import { addToDb } from "./add-to-db";
 
 /*
-The main header of the project.
+The control center of the application.
 */
 
-async function main(): Promise<void> {
-  console.log("Price Tracker started. Press Ctrl + C to exit.\n");
+function main(): void {
+  serve();
 
-  while (true) {
-    await output();
-    console.log("\n");
-    await Bun.sleep(30000);
-  }
+  setInterval(async () => {
+    try {
+      await addToDb();
+    } catch (error: unknown) {
+      console.error(error);
+    }
+  }, 30000);
 }
 
 main();
