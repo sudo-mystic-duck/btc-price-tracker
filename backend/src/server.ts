@@ -16,7 +16,13 @@ export function serve(): void {
       if (url.pathname === "/prices") {
         try {
           const rows = db.query("SELECT * FROM prices ORDER BY id DESC").all();
-          return Response.json(rows);
+
+          return new Response(JSON.stringify(rows), {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:5173",
+            },
+          });
         } catch (error) {
           console.error(error);
           return new Response("Internal Server Error", { status: 500 });
@@ -33,7 +39,12 @@ export function serve(): void {
             return new Response("No prices stored yet", { status: 404 });
           }
 
-          return Response.json(price);
+          return new Response(JSON.stringify(price), {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:5173",
+            },
+          });
         } catch (error) {
           console.error(error);
           return new Response("Failed to fetch price", { status: 500 });
