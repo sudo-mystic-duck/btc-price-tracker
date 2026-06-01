@@ -1,98 +1,30 @@
-:root {
-    --bg: #0b1220;
-    --c: #1e293b;
-    --t: #f1f5f9;
-    --a: #f59e0b;
-    --g: rgba(245, 158, 11, 0.3);
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
 }
 
-.light {
-    --bg: #f8fafc;
-    --c: #ffffff;
-    --t: #0f172a;
-    --a: #d97706;
-    --g: rgba(0, 0, 0, 0.05);
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-primary: oklch(78% 0.16 75);
+  --color-primary-content: oklch(20% 0.03 75);
+  --color-secondary: oklch(65% 0.12 250);
+  --color-accent: oklch(78% 0.16 75);
+  --color-base-100: oklch(22% 0.02 260);
+  --color-base-200: oklch(18% 0.02 260);
+  --color-base-300: oklch(15% 0.02 260);
 }
 
-body,
-html {
-    margin: 0;
-    height: 100%;
-    font-family: sans-serif;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-.app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background: var(--bg);
-    color: var(--t);
-    transition: 0.3s;
-}
-
-header,
-footer {
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--g);
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-}
-.brand img {
-    width: 26px;
-}
-
-main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    background: var(--c);
-    padding: 3rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 0 40px var(--g);
-    border: 1px solid var(--g);
-}
-
-h1 {
-    font-size: 3.5rem;
-    color: var(--a);
-    margin: 0.5rem 0;
-}
-p {
-    opacity: 0.6;
-    margin: 0;
-}
-small {
-    opacity: 0.4;
-}
-
-footer {
-    justify-content: center;
-    gap: 10px;
-    font-size: 0.8rem;
-    border-top: 1px solid var(--g);
-    border-bottom: none;
-    flex-wrap: wrap;
-}
-a {
-    color: #3b82f6;
-    text-decoration: none;
-}
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
+  body {
+    @apply min-h-screen bg-base-200 text-base-content antialiased;
+  }
 }

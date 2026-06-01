@@ -1,10 +1,5 @@
 import type { CoinBase, PriceData } from "./types";
 
-/*
-Fetches the BTC price from coinbase.
-It gives back an error if it fails.
-*/
-
 export async function fetchBtcPrice(): Promise<PriceData> {
   const response = await fetch(
     "https://api.coinbase.com/v2/prices/BTC-USD/spot",
@@ -15,9 +10,14 @@ export async function fetchBtcPrice(): Promise<PriceData> {
   }
 
   const result = (await response.json()) as CoinBase;
+  const amount = Number.parseFloat(result.data.amount);
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    throw new Error("Invalid BTC price from API.");
+  }
 
   return {
-    amount: parseFloat(result.data.amount),
+    amount,
     base: result.data.base,
     currency: result.data.currency,
   };

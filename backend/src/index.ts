@@ -1,20 +1,33 @@
 import { serve } from "./server";
 import { addToDb } from "./add-to-db";
+import { config } from "./config";
+import { closeDb } from "./db/index";
 
-/*
-The control center of the application.
-*/
-
-function main(): void {
+async function main(): Promise<void> {
   serve();
 
-  setInterval(async () => {
+  try {
+    await addToDb();
+  } catch (error: unknown) {
+    console.error("Initial price fetch failed:", error);
+  }
+
+  const poll = setInterval(async () => {
     try {
       await addToDb();
     } catch (error: unknown) {
       console.error(error);
     }
-  }, 30000);
+  }, config.pollIntervalMs);
+
+  const shutdown = () => {
+    clearInterval(poll);
+    closeDb();
+    process.exit(0);
+  };
+
+  process.on("SIGINT", shutdown);
+  process.on("SIGTERM", shutdown);
 }
 
 main();

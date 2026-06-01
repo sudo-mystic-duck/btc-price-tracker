@@ -1,7 +1,7 @@
 export interface Data {
-  id: string;
+  id: number;
   base: string;
-  price: string;
+  price: number;
   currency: string;
-  timestamp: number;
+  timestamp: string;
 }

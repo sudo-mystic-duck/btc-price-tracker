@@ -29,7 +29,47 @@ bun install
 bun dev
 ```
 
-Then open the browser and enter "localhost:5173"
+Then open the browser and enter `http://localhost:5173`
+
+### Environment variables
+
+Copy `backend/.env.example` and `frontend/.env.example` to `.env` and adjust as needed.
+
+**Backend** (`backend/.env`):
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3000` | HTTP server port |
+| `CORS_ORIGIN` | `http://localhost:5173` | Allowed browser origin |
+| `POLL_INTERVAL_MS` | `30000` | Coinbase fetch interval |
+| `DB_PATH` | `db.sqlite` | SQLite file path |
+
+**Frontend** (`frontend/.env`):
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_URL` | `/api` | API base URL (Vite proxies `/api` to the backend in dev) |
+
+The frontend uses [Tailwind CSS 4](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/) for layout and theming. Use the header control to switch light, dark, or system theme (preference is saved in `localStorage`).
+
+### API
+
+| Route | Description |
+|-------|-------------|
+| `GET /` | Latest stored price |
+| `GET /prices` | Full price history (newest first) |
+| `GET /health` | Server and database health check |
+
+### Tests
+
+```bash
+cd backend && bun test
+cd frontend && bun test
+```
+
+### Rules for AI agents
+
+See [RULES.md](RULES.md) at the repository root.
 
 ## Installation for Users
 Currently there is no v2.0.0 executable release. If you want to download the v1.0.0(only terminal) Then follow these steps:
