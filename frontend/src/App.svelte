@@ -1,14 +1,14 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { fetchNewPrice, fetchAllPrices } from "./lib/api";
-    import type { Data } from "./lib/types";
+    import type { PriceRecord } from "./lib/types";
     import { formatPrice, formatTime } from "./lib/format";
     import PriceChart from "./lib/PriceChart.svelte";
     import ThemeToggle from "./lib/ThemeToggle.svelte";
     import { getStoredTheme, type Theme } from "./lib/theme";
 
-    let data = $state<Data | null>(null);
-    let history = $state<Data[]>([]);
+    let data = $state<PriceRecord | null>(null);
+    let history = $state<PriceRecord[]>([]);
     let error = $state<string | null>(null);
     let loading = $state(true);
     let theme = $state<Theme>(getStoredTheme());
@@ -48,9 +48,7 @@
 <div class="min-h-screen flex flex-col">
     <div class="navbar bg-base-100 border-b border-base-300 shadow-sm px-4 lg:px-8">
         <div class="navbar-start gap-3">
-            <div
-                class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-primary p-1.5"
-            >
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center">
                 <img
                     src="/bitcoin.png"
                     alt="Bitcoin"

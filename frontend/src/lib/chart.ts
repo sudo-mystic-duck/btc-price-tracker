@@ -1,7 +1,7 @@
-import type { Data } from "./types";
+import type { PriceRecord } from "./types";
 
 export function buildChartPoints(
-    prices: Data[],
+    prices: PriceRecord[],
     width = 400,
     height = 120,
     padding = 8,
@@ -28,7 +28,9 @@ export function buildChartPoints(
         .join(" ");
 }
 
-export function getPriceRange(prices: Data[]): { min: number; max: number } | null {
+export function getPriceRange(
+  prices: PriceRecord[],
+): { min: number; max: number } | null {
     if (prices.length === 0) return null;
     const values = prices.map((p) => p.price);
     return { min: Math.min(...values), max: Math.max(...values) };

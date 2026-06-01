@@ -14,6 +14,10 @@ export function insertPrice(db: Database, price: NewPrice): void {
     throw new Error("base and currency are required");
   }
 
+  if (price.price <= 0) {
+    throw new Error("price must be positive");
+  }
+
   db.run(
     "INSERT INTO prices (base, price, currency) VALUES (?, ?, ?)",
     [base, price.price, currency],

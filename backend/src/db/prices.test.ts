@@ -48,10 +48,10 @@ describe("prices repository", () => {
     const db = useTestDatabase();
     expect(() =>
       insertPrice(db, { base: "BTC", price: 0, currency: "USD" }),
-    ).toThrow();
+    ).toThrow("price must be positive");
     expect(() =>
-      insertPrice(db, { base: "BTC", price: -10, currency: "USD" }),
-    ).toThrow();
+      insertPrice(db, { base: "BTC", price: -1, currency: "USD" }),
+    ).toThrow("price must be positive");
     expect(countPrices(db)).toBe(0);
   });
 

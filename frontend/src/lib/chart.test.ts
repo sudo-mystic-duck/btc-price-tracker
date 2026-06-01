@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { buildChartPoints, getPriceRange } from "./chart";
-import type { Data } from "./types";
+import type { PriceRecord } from "./types";
 
-function row(id: number, price: number): Data {
+function row(id: number, price: number): PriceRecord {
   return {
     id,
     base: "BTC",

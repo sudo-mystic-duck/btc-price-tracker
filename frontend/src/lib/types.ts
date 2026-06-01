@@ -1,4 +1,4 @@
-export interface Data {
+export interface PriceRecord {
   id: number;
   base: string;
   price: number;

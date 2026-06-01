@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { Data } from "./types";
+    import type { PriceRecord } from "./types";
     import { buildChartPoints, getPriceRange } from "./chart";
 
     interface Props {
-        prices: Data[];
+        prices: PriceRecord[];
     }
 
     let { prices }: Props = $props();

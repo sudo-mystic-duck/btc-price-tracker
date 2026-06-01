@@ -1,6 +1,6 @@
 import type { Database } from "bun:sqlite";
 import { config } from "./config";
-import { getAllPrices, getLatestPrice, ping } from "./db/prices";
+import { getAllPrices, getLatestPrice, ping } from "./db";
 
 export function jsonHeaders(): Record<string, string> {
   return {
